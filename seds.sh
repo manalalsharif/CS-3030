@@ -1,3 +1,52 @@
+#step 1
+#!/bin/bash
+
+filepath="/home/hvalle/submit/cs3030/files/presidents.csv"
+directory="fredData/"
+
+# Get date
+
+DATE=$(date "+%Y-%m-%d")
+copydate=".${DATE}"
+
+mm=$(echo ${DATE} | cut -d'-' -f2)
+
+# Get filename
+
+filename=$(basename $filepath)
+datedfilename="${filename}.${DATE}"
+
+# Check for folder structure or make folder structure
+
+check_make_folder_structure()
+{
+	(cd ~/fredData/ || mkdir ~/fredData/)2>/dev/null
+	(cd ~/fredData/01 || mkdir ~/fredData/01)2>/dev/null
+	(cd ~/fredData/02 || mkdir ~/fredData/02)2>/dev/null
+	(cd ~/fredData/03 || mkdir ~/fredData/03)2>/dev/null
+	(cd ~/fredData/04 || mkdir ~/fredData/04)2>/dev/null
+	(cd ~/fredData/05 || mkdir ~/fredData/05)2>/dev/null
+	(cd ~/fredData/06 || mkdir ~/fredData/06)2>/dev/null
+	(cd ~/fredData/07 || mkdir ~/fredData/07)2>/dev/null
+	(cd ~/fredData/08 || mkdir ~/fredData/08)2>/dev/null
+	(cd ~/fredData/09 || mkdir ~/fredData/09)2>/dev/null
+	(cd ~/fredData/10 || mkdir ~/fredData/10)2>/dev/null
+	(cd ~/fredData/11 || mkdir ~/fredData/11)2>/dev/null
+	(cd ~/fredData/12 || mkdir ~/fredData/12)2>/dev/null
+}
+
+check_make_folder_structure
+
+#step 2
+cd ${directory}${mm}
+
+if [[ -f "${filename}" ]]; then
+	cd ~
+	scp kc98571@icarus:${filepath} ${directory}${mm}/${datedfilename}
+else
+	cd ~
+	scp kc98571@icarus:${filepath} ${directory}${mm}
+
 #step 3
 sed -i -e 's/\//./g' presidents.csv
 
